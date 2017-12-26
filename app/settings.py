@@ -25,7 +25,7 @@ SECRET_KEY = '8v9bk3xespc4&qj0^4xbqywj$^0q+s+o%d!9z96ja-ik-+$+3v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    ###
+    'rest_framework',
+    ###
+    'rest',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +60,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,4 +104,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT= os.path.join(BASE_DIR,"static_cdn")
+MEDIA_ROOT= os.path.join(BASE_DIR,"media_cdn")
+
 STATIC_URL = '/static/'
+MEDIA_URL='/media/'
+
+
+STATICFILES_DIRS= (
+    os.path.join(BASE_DIR, "assets"),
+)
+
+REST_FRAMEWORK={
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
